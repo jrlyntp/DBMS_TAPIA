@@ -1,10 +1,7 @@
-@extends('products.layouts') 
-
- 
+@extends('layouts.app') 
 
 @section('content') 
 
- 
 
 <div class="row justify-content-center mt-3"> 
 
@@ -33,6 +30,7 @@
             <div class="card-body"> 
 
                 <form action="{{ route('products.store') }}" method="post"> 
+                
 
                     @csrf 
 
@@ -158,10 +156,4 @@
 
      
 
-@endsection 
-
- 
-
- 
-
- 
+@endsection

@@ -1,185 +1,50 @@
-@extends('products.layouts') 
-
- 
-
-@section('content') 
-
- 
-
-<div class="row justify-content-center mt-3"> 
-
-    <div class="col-md-8"> 
-
- 
-
-        @if ($message = Session::get('success')) 
-
-            <div class="alert alert-success" role="alert"> 
-
-                {{ $message }} 
-
-            </div> 
-
-        @endif 
-
- 
-
-        <div class="card"> 
-
-            <div class="card-header"> 
-
-                <div class="float-start"> 
-
-                    Edit Product 
-
-                </div> 
-
-                <div class="float-end"> 
-
-                    <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">&larr; Back</a> 
-
-                </div> 
-
-            </div> 
-
-            <div class="card-body"> 
-
-                <form action="{{ route('products.update', $product->id) }}" method="post"> 
-
-                    @csrf 
-
-                    @method("PUT") 
-
- 
-
-                    <div class="mb-3 row"> 
-
-                        <label for="code" class="col-md-4 col-form-label text-md-end text-start">Code</label> 
-
-                        <div class="col-md-6"> 
-
-                          <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ $product->code }}"> 
-
-                            @if ($errors->has('code')) 
-
-                                <span class="text-danger">{{ $errors->first('code') }}</span> 
-
-                            @endif 
-
-                        </div> 
-
-                    </div> 
-
- 
-
-                    <div class="mb-3 row"> 
-
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label> 
-
-                        <div class="col-md-6"> 
-
-                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $product->name }}"> 
-
-                            @if ($errors->has('name')) 
-
-                                <span class="text-danger">{{ $errors->first('name') }}</span> 
-
-                            @endif 
-
-                        </div> 
-
-                    </div> 
-
- 
-
-                    <div class="mb-3 row"> 
-
-                        <label for="quantity" class="col-md-4 col-form-label text-md-end text-start">Quantity</label> 
-
-                        <div class="col-md-6"> 
-
-                          <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ $product->quantity }}"> 
-
-                            @if ($errors->has('quantity')) 
-
-                                <span class="text-danger">{{ $errors->first('quantity') }}</span> 
-
-                            @endif 
-
-                        </div> 
-
-                    </div> 
-
- 
-
-                    <div class="mb-3 row"> 
-
-                        <label for="price" class="col-md-4 col-form-label text-md-end text-start">Price</label> 
-
-                        <div class="col-md-6"> 
-
-                          <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ $product->price }}"> 
-
-                            @if ($errors->has('price')) 
-
-                                <span class="text-danger">{{ $errors->first('price') }}</span> 
-
-                            @endif 
-
-                        </div> 
-
-                    </div> 
-
- 
-
-                    <div class="mb-3 row"> 
-
-                        <label for="description" class="col-md-4 col-form-label text-md-end text-start">Description</label> 
-
-                        <div class="col-md-6"> 
-
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ $product->description }}</textarea> 
-
-                            @if ($errors->has('description')) 
-
-                                <span class="text-danger">{{ $errors->first('description') }}</span> 
-
-                            @endif 
-
-                        </div> 
-
-                    </div> 
-
-                     
-
-                    <div class="mb-3 row"> 
-
-                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update"> 
-
-                    </div> 
-
-                     
-
-                </form> 
-
-            </div> 
-
-        </div> 
-
-    </div>     
-
-</div> 
-
-     
-
-@endsection 
-
- 
-
- 
-
- 
-
- 
-
- 
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="edit-modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="edit_id" id="edit_id">
+        <div class="mb-3">
+          <label for="" class="form-label">Code</label>
+          <input type="text"
+            class="form-control" name="edit_code" id="edit_code" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Help text</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Name</label>
+            <input type="text"
+              class="form-control" name="edit_name" id="edit_name" aria-describedby="helpId" placeholder="">
+            <small id="helpId" class="form-text text-muted">Help text</small>
+          </div>
+        
+          <div class="mb-3">
+            <label for="" class="form-label">Quantity</label>
+            <input type="number"
+              class="form-control" name="edit_quantity" id="edit_quantity" aria-describedby="helpId" placeholder="">
+            <small id="helpId" class="form-text text-muted">Help text</small>
+          </div>
+        
+          <div class="mb-3">
+            <label for="" class="form-label">Price</label>
+            <input type="number"
+              class="form-control" name="edit_price" id="edit_price" aria-describedby="helpId" placeholder="">
+            <small id="helpId" class="form-text text-muted">Help text</small>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">Description</label>
+            <textarea class="form-control" name="edit_description" id="edit_description" rows="3"></textarea>
+          </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update-product">Update</button> 
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-@extends('products.layouts') 
+@extends('layouts.app') 
 
  
 
@@ -40,7 +40,7 @@
 
                         <div class="col-md-6" style="line-height: 35px;"> 
 
-                            {{ $product->code }} 
+                            {{ $product->Code }} 
 
                         </div> 
 
@@ -54,7 +54,7 @@
 
                         <div class="col-md-6" style="line-height: 35px;"> 
 
-                            {{ $product->name }} 
+                            {{ $product->Name }} 
 
                         </div> 
 
@@ -68,7 +68,7 @@
 
                         <div class="col-md-6" style="line-height: 35px;"> 
 
-                            {{ $product->quantity }} 
+                            {{ $product->Quantity }} 
 
                         </div> 
 
@@ -82,7 +82,7 @@
 
                         <div class="col-md-6" style="line-height: 35px;"> 
 
-                            {{ $product->price }} 
+                            {{ $product->Price }} 
 
                         </div> 
 
@@ -96,7 +96,7 @@
 
                         <div class="col-md-6" style="line-height: 35px;"> 
 
-                            {{ $product->description }} 
+                            {{ $product->Description }} 
 
                         </div> 
 
@@ -114,4 +114,4 @@
 
      
 
-@endsection 
+@endsection
